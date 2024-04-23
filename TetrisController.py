@@ -16,17 +16,26 @@ class TetrisController:
 
     def control_piece(self):
 
+        orientation = 0
+
         for event in pygame.event.get():
             if event.type == KEYDOWN:
                 if event.key == K_LEFT:
                     self.piece.move_left()
+
                 elif event.key == K_RIGHT:
                     self.piece.move_right()
+
                 elif event.key == K_UP:
-                    self.piece.rotate_cw()
+                    orientation += 1
+                    self.piece.rotate_cw(orientation)
+
                 elif event.key == K_DOWN:
-                    self.piece.rotate_ccw()
+                    orientation -= 1
+                    self.piece.rotate_ccw(orientation)
+
                 elif event.key == K_SPACE:
                     self.piece.drop()
+
                 elif event.key == K_z:
                     self.piece.fall_faster()
