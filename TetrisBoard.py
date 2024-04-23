@@ -1,6 +1,9 @@
 # Currently, this code only creates a list of lists and checks to see if
 # rows are full. It checks that by seeing if each pixel in a row is a space.
 # If at least one square is a space then it is not full.
+import TetrisListPiece
+
+
 class TetrisBoard:
     def __init__(self):
         rows = []
@@ -39,6 +42,15 @@ class TetrisBoard:
         del self._board[row_num]
         self._board.insert(0, self._board[0])  ###This may make each row equal
         ###...to each other later on which could cause issues
+
+    def add_piece(self):
+        ActivePiece = TetrisListPiece.TetrisPiece()
+        print(ActivePiece.piece[0])
+        square_dim = len(ActivePiece.piece[0])
+        for i in range(square_dim):
+            base = [" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "]
+            base[4 : 4 + square_dim] = ActivePiece.piece[0][i]
+            self._board[i] = base
 
     def __repr__(self):
         return str(self._board)
