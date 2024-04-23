@@ -83,5 +83,6 @@ class TetrisPiece:
     pieces = [O, I, S, Z, L, J, T]
 
     def __init__(self):
-        self.color = random.choice(TetrisPiece.colors)
-        self.piece = random.choice(TetrisPiece.pieces)
+        random_index = random.randint(0, 6)
+        self.color = TetrisPiece.colors[random_index]
+        self.piece = TetrisPiece.pieces[random_index]
