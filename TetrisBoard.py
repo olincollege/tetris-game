@@ -7,7 +7,7 @@ import TetrisListPiece
 class TetrisBoard:
     def __init__(self):
         rows = []
-        for _ in range(12):
+        for _ in range(10):
             rows.append(" ")
         board = []
         for _ in range(24):
@@ -48,8 +48,8 @@ class TetrisBoard:
         print(ActivePiece.piece[0])
         square_dim = len(ActivePiece.piece[0])
         for i in range(square_dim):
-            base = [" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "]
-            base[4 : 4 + square_dim] = ActivePiece.piece[0][i]
+            base = [" " for j in range(10)]
+            base[3 : 3 + square_dim] = ActivePiece.piece[0][i]
             self._board[i] = base
 
     def __repr__(self):
