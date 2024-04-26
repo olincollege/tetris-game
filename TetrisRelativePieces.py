@@ -7,7 +7,7 @@ from abc import ABC, abstractmethod
 
 class TetrisPieces(ABC):
     """
-    Abstract class for e=tetris pieces
+    Abstract class for tetris pieces
 
     Attributes:
     """
@@ -58,12 +58,19 @@ class TetrisPieces(ABC):
     def rotate_ccw(self, orientation):
         pass
 
+    @abstractmethod
+    def color(self):
+        pass
+
 
 # subclasses below
 class OPiece(TetrisPieces):
     """
     Docstring here.
     """
+
+    def color(self):
+        return TetrisPieces.YELLOW
 
     def full_piece(self):
         return [
@@ -78,6 +85,9 @@ class IPiece(TetrisPieces):
     """
     Docstring here.
     """
+
+    def color(self):
+        return TetrisPieces.CYAN
 
     def full_piece(self):
         return [
@@ -103,6 +113,9 @@ class JPiece(TetrisPieces):
     """
     Docstring here.
     """
+
+    def color(self):
+        return TetrisPieces.ORANGE
 
     def full_piece(self):
         return [
@@ -206,6 +219,9 @@ class LPiece(TetrisPieces):
     Docstring here.
     """
 
+    def color(self):
+        return TetrisPieces.BLUE
+
     def full_piece(self):
         return [
             self.coordinates,
@@ -304,6 +320,9 @@ class SPiece(TetrisPieces):
     Docstring here.
     """
 
+    def color(self):
+        return TetrisPieces.GREEN
+
     def full_piece(self):
         return [
             self.coordinates,
@@ -336,6 +355,9 @@ class ZPiece(TetrisPieces):
     """
     Docstring here
     """
+
+    def color(self):
+        return TetrisPieces.RED
 
     def full_piece(self):
         return [
@@ -371,6 +393,9 @@ class TPiece(TetrisPieces):
     """
     Docstring here.
     """
+
+    def color(self):
+        return TetrisPieces.MAGENTA
 
     def full_piece(self):
         return [
