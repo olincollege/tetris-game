@@ -28,11 +28,11 @@ class TetrisController:
 
                 elif event.key == K_UP:
                     orientation += 1
-                    self.piece.rotate_cw(orientation)
+                    self.piece.rotate_cw(abs(orientation % 4))
 
                 elif event.key == K_DOWN:
                     orientation -= 1
-                    self.piece.rotate_ccw(orientation)
+                    self.piece.rotate_ccw(abs(orientation % 4))
 
                 elif event.key == K_SPACE:
                     self.piece.drop()
