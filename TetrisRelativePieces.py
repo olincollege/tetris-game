@@ -108,6 +108,8 @@ class IPiece(TetrisPieces):
                 self.coordinates[i][0] -= i
                 self.coordinates[i][1] -= i
 
+        return self.coordinates
+
 
 class JPiece(TetrisPieces):
     """
@@ -169,6 +171,8 @@ class JPiece(TetrisPieces):
 
             self.coordinates[3][1] += 1
 
+        return self.coordinates
+
     def rotate_ccw(self, orientation):
         if orientation == 3:
             self.coordinates[0][0] += 1
@@ -212,6 +216,8 @@ class JPiece(TetrisPieces):
 
             self.coordinates[3][0] += 2
             self.coordinates[3][1] -= 1
+
+        return self.coordinates
 
 
 class LPiece(TetrisPieces):
@@ -272,6 +278,8 @@ class LPiece(TetrisPieces):
 
             self.coordinates[3][0] += 1
 
+        return self.coordinates
+
     def rotate_ccw(self, orientation):
         if orientation == 3:
             self.coordinates[0][0] += 2
@@ -314,6 +322,8 @@ class LPiece(TetrisPieces):
 
             self.coordinates[3][1] += 2
 
+        return self.coordinates
+
 
 class SPiece(TetrisPieces):
     """
@@ -349,6 +359,8 @@ class SPiece(TetrisPieces):
 
             self.coordinates[3][0] += 1
             self.coordinates[3][1] -= 1
+
+        return self.coordinates
 
 
 class ZPiece(TetrisPieces):
@@ -387,6 +399,8 @@ class ZPiece(TetrisPieces):
 
             self.coordinates[3][0] -= 1
             self.coordinates[3][1] += 1
+
+        return self.coordinates
 
 
 class TPiece(TetrisPieces):
@@ -438,6 +452,8 @@ class TPiece(TetrisPieces):
 
             self.coordinates[2][1] += 2
 
+        return self.coordinates
+
     def rotate_ccw(self, orientation):
         if orientation == 3:
             self.coordinates[0][0] += 2
@@ -470,3 +486,5 @@ class TPiece(TetrisPieces):
             self.coordinates[1][1] -= 1
 
             self.coordinates[2][0] -= 2
+
+        return self.coordinates
