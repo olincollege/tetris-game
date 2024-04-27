@@ -39,12 +39,18 @@ class TetrisPieces(ABC):
             square[0] -= 1
 
     def move_left(self):
-        for square in self.coordinates:
-            square[1] -= 1
+        try:
+            for square in self.coordinates:
+                square[1] -= 1
+        except IndexError:
+            pass
 
     def move_right(self):
-        for square in self.coordinates:
-            square[1] += 1
+        try:
+            for square in self.coordinates:
+                square[1] += 1
+        except IndexError:
+            pass
 
     @abstractmethod
     def full_piece(self):
