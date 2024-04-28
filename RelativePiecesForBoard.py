@@ -124,91 +124,91 @@ class JPiece(TetrisPieces):
 
     def rotate_cw(self, orientation):
         if orientation == 1:
-            self.coordinates[0][0] += 1
-
-            self.coordinates[1][1] -= 1
-
-            self.coordinates[2][0] -= 1
-
-            self.coordinates[3][0] -= 2
-            self.coordinates[3][1] += 1
-
-        elif orientation == 2:
-            self.coordinates[0][0] += 1
             self.coordinates[0][1] += 1
 
-            self.coordinates[1][0] += 2
+            self.coordinates[1][0] -= 1
 
-            self.coordinates[2][0] += 1
             self.coordinates[2][1] -= 1
 
             self.coordinates[3][1] -= 2
+            self.coordinates[3][0] += 1
 
-        elif orientation == 3:
-            self.coordinates[0][0] -= 1
+        elif orientation == 2:
             self.coordinates[0][1] += 1
+            self.coordinates[0][0] += 1
 
             self.coordinates[1][1] += 2
 
-            self.coordinates[2][0] += 1
             self.coordinates[2][1] += 1
-
-            self.coordinates[3][0] += 2
-
-        elif orientation == 0:
-            self.coordinates[0][0] -= 1
-            self.coordinates[0][1] -= 2
-
-            self.coordinates[1][0] -= 2
-            self.coordinates[1][1] -= 1
-
             self.coordinates[2][0] -= 1
-
-            self.coordinates[3][1] += 1
-
-    def rotate_ccw(self, orientation):
-        if orientation == 3:
-            self.coordinates[0][0] += 1
-            self.coordinates[0][1] += 2
-
-            self.coordinates[1][0] += 2
-            self.coordinates[1][1] += 1
-
-            self.coordinates[2][0] += 1
-
-            self.coordinates[3][1] -= 1
-
-        elif orientation == 2:
-            self.coordinates[0][0] += 1
-            self.coordinates[0][1] -= 1
-
-            self.coordinates[1][1] -= 2
-
-            self.coordinates[2][0] -= 1
-            self.coordinates[2][1] -= 1
 
             self.coordinates[3][0] -= 2
 
-        elif orientation == 1:
-            self.coordinates[0][0] -= 1
+        elif orientation == 3:
             self.coordinates[0][1] -= 1
+            self.coordinates[0][0] += 1
 
-            self.coordinates[1][0] -= 2
+            self.coordinates[1][0] += 2
 
-            self.coordinates[2][0] -= 1
             self.coordinates[2][1] += 1
+            self.coordinates[2][0] += 1
 
             self.coordinates[3][1] += 2
 
         elif orientation == 0:
+            self.coordinates[0][1] -= 1
+            self.coordinates[0][0] -= 2
+
+            self.coordinates[1][1] -= 2
+            self.coordinates[1][0] -= 1
+
+            self.coordinates[2][1] -= 1
+
+            self.coordinates[3][0] += 1
+
+    def rotate_ccw(self, orientation):
+        if orientation == 3:
+            self.coordinates[0][1] += 1
+            self.coordinates[0][0] += 2
+
+            self.coordinates[1][1] += 2
+            self.coordinates[1][0] += 1
+
+            self.coordinates[2][1] += 1
+
+            self.coordinates[3][0] -= 1
+
+        elif orientation == 2:
+            self.coordinates[0][1] += 1
             self.coordinates[0][0] -= 1
 
-            self.coordinates[1][1] += 1
+            self.coordinates[1][0] -= 2
 
+            self.coordinates[2][1] -= 1
+            self.coordinates[2][0] -= 1
+
+            self.coordinates[3][1] -= 2
+
+        elif orientation == 1:
+            self.coordinates[0][1] -= 1
+            self.coordinates[0][0] -= 1
+
+            self.coordinates[1][1] -= 2
+
+            self.coordinates[2][1] -= 1
             self.coordinates[2][0] += 1
 
             self.coordinates[3][0] += 2
-            self.coordinates[3][1] -= 1
+
+        elif orientation == 0:
+            self.coordinates[0][1] -= 1
+
+            self.coordinates[1][0] += 1
+
+            self.coordinates[2][1] += 1
+
+            self.coordinates[3][1] += 2
+            self.coordinates[3][0] -= 1
 
 
 class LPiece(TetrisPieces):
@@ -229,87 +229,87 @@ class LPiece(TetrisPieces):
 
     def rotate_cw(self, orientation):
         if orientation == 1:
-            self.coordinates[0][0] += 1
             self.coordinates[0][1] += 1
-
-            self.coordinates[2][0] -= 1
-            self.coordinates[2][1] -= 1
-
-            self.coordinates[3][1] -= 2
-
-        elif orientation == 2:
             self.coordinates[0][0] += 1
 
-            self.coordinates[1][1] += 1
-
+            self.coordinates[2][1] -= 1
             self.coordinates[2][0] -= 1
-            self.coordinates[2][1] += 2
 
             self.coordinates[3][0] -= 2
-            self.coordinates[3][1] += 1
 
-        elif orientation == 3:
-            self.coordinates[0][1] -= 2
-
-            self.coordinates[1][0] += 1
-            self.coordinates[1][1] -= 1
-
-            self.coordinates[2][0] += 2
-
-            self.coordinates[3][0] += 1
-            self.coordinates[3][1] += 1
-
-        elif orientation == 0:
-            self.coordinates[0][0] -= 2
+        elif orientation == 2:
             self.coordinates[0][1] += 1
 
-            self.coordinates[1][0] -= 1
+            self.coordinates[1][0] += 1
 
             self.coordinates[2][1] -= 1
+            self.coordinates[2][0] += 2
 
+            self.coordinates[3][1] -= 2
             self.coordinates[3][0] += 1
+
+        elif orientation == 3:
+            self.coordinates[0][0] -= 2
+
+            self.coordinates[1][1] += 1
+            self.coordinates[1][0] -= 1
+
+            self.coordinates[2][1] += 2
+
+            self.coordinates[3][1] += 1
+            self.coordinates[3][0] += 1
+
+        elif orientation == 0:
+            self.coordinates[0][1] -= 2
+            self.coordinates[0][0] += 1
+
+            self.coordinates[1][1] -= 1
+
+            self.coordinates[2][0] -= 1
+
+            self.coordinates[3][1] += 1
 
     def rotate_ccw(self, orientation):
         if orientation == 3:
-            self.coordinates[0][0] += 2
-            self.coordinates[0][1] -= 1
-
-            self.coordinates[1][0] += 1
-
-            self.coordinates[2][1] += 1
-
-            self.coordinates[3][0] -= 1
-
-        if orientation == 2:
             self.coordinates[0][1] += 2
+            self.coordinates[0][0] -= 1
 
-            self.coordinates[1][0] -= 1
             self.coordinates[1][1] += 1
 
-            self.coordinates[2][0] -= 2
+            self.coordinates[2][0] += 1
 
-            self.coordinates[3][0] -= 1
             self.coordinates[3][1] -= 1
 
-        if orientation == 1:
-            self.coordinates[0][0] -= 1
+        if orientation == 2:
+            self.coordinates[0][0] += 2
 
             self.coordinates[1][1] -= 1
+            self.coordinates[1][0] += 1
 
-            self.coordinates[2][0] += 1
             self.coordinates[2][1] -= 2
 
-            self.coordinates[3][0] += 2
             self.coordinates[3][1] -= 1
+            self.coordinates[3][0] -= 1
 
-        if orientation == 0:
-            self.coordinates[0][0] -= 1
+        if orientation == 1:
             self.coordinates[0][1] -= 1
 
-            self.coordinates[2][0] += 1
+            self.coordinates[1][0] -= 1
+
             self.coordinates[2][1] += 1
+            self.coordinates[2][0] -= 2
 
             self.coordinates[3][1] += 2
+            self.coordinates[3][0] -= 1
+
+        if orientation == 0:
+            self.coordinates[0][1] -= 1
+            self.coordinates[0][0] -= 1
+
+            self.coordinates[2][1] += 1
+            self.coordinates[2][0] += 1
+
+            self.coordinates[3][0] += 2
 
 
 class SPiece(TetrisPieces):
@@ -330,22 +330,22 @@ class SPiece(TetrisPieces):
 
     def rotate_cw(self, orientation):
         if orientation == 1:
-            self.coordinates[0][0] += 2
+            self.coordinates[0][1] += 2
 
-            self.coordinates[1][0] += 1
             self.coordinates[1][1] += 1
+            self.coordinates[1][0] += 1
 
-            self.coordinates[3][0] -= 1
-            self.coordinates[3][1] += 1
+            self.coordinates[3][1] -= 1
+            self.coordinates[3][0] += 1
 
         if orientation == 0:
-            self.coordinates[0][0] -= 2
+            self.coordinates[0][1] -= 2
 
-            self.coordinates[1][0] -= 1
             self.coordinates[1][1] -= 1
+            self.coordinates[1][0] -= 1
 
-            self.coordinates[3][0] += 1
-            self.coordinates[3][1] -= 1
+            self.coordinates[3][1] += 1
+            self.coordinates[3][0] -= 1
 
 
 class ZPiece(TetrisPieces):
@@ -366,24 +366,24 @@ class ZPiece(TetrisPieces):
 
     def rotate_cw(self, orientation):
         if orientation == 1:
-            self.coordinates[0][1] += 2
+            self.coordinates[0][0] += 2
 
-            self.coordinates[1][0] += 1
+            self.coordinates[1][1] += 1
 
-            self.coordinates[2][1] += 1
+            self.coordinates[2][0] += 1
 
-            self.coordinates[3][0] += 1
-            self.coordinates[3][1] -= 1
+            self.coordinates[3][1] += 1
+            self.coordinates[3][0] -= 1
 
         if orientation == 0:
-            self.coordinates[0][1] -= 2
+            self.coordinates[0][0] -= 2
 
-            self.coordinates[1][0] -= 1
+            self.coordinates[1][1] -= 1
 
-            self.coordinates[2][1] -= 1
+            self.coordinates[2][0] -= 1
 
-            self.coordinates[3][0] -= 1
-            self.coordinates[3][1] += 1
+            self.coordinates[3][1] -= 1
+            self.coordinates[3][0] += 1
 
 
 class TPiece(TetrisPieces):
@@ -404,66 +404,66 @@ class TPiece(TetrisPieces):
 
     def rotate_cw(self, orientation):
         if orientation == 1:
-            self.coordinates[0][1] += 2
-
-            self.coordinates[1][0] += 1
-            self.coordinates[1][1] += 1
-
-            self.coordinates[2][0] += 2
-
-        if orientation == 2:
             self.coordinates[0][0] += 2
 
+            self.coordinates[1][1] += 1
             self.coordinates[1][0] += 1
-            self.coordinates[1][1] -= 1
 
-            self.coordinates[2][1] -= 2
+            self.coordinates[2][1] += 2
 
-        if orientation == 3:
-            self.coordinates[0][1] -= 2
+        if orientation == 2:
+            self.coordinates[0][1] += 2
 
+            self.coordinates[1][1] += 1
             self.coordinates[1][0] -= 1
-            self.coordinates[1][1] -= 1
 
             self.coordinates[2][0] -= 2
 
-        if orientation == 0:
+        if orientation == 3:
             self.coordinates[0][0] -= 2
 
+            self.coordinates[1][1] -= 1
             self.coordinates[1][0] -= 1
-            self.coordinates[1][1] += 1
 
-            self.coordinates[2][1] += 2
+            self.coordinates[2][1] -= 2
+
+        if orientation == 0:
+            self.coordinates[0][1] -= 2
+
+            self.coordinates[1][1] -= 1
+            self.coordinates[1][0] += 1
+
+            self.coordinates[2][0] += 2
 
     def rotate_ccw(self, orientation):
         if orientation == 3:
-            self.coordinates[0][0] += 2
-
-            self.coordinates[1][0] += 1
-            self.coordinates[1][1] -= 1
-
-            self.coordinates[2][1] -= 2
-
-        if orientation == 2:
             self.coordinates[0][1] += 2
 
-            self.coordinates[1][0] += 1
             self.coordinates[1][1] += 1
-
-            self.coordinates[2][0] += 2
-
-        if orientation == 1:
-            self.coordinates[0][0] -= 2
-
             self.coordinates[1][0] -= 1
+
+            self.coordinates[2][0] -= 2
+
+        if orientation == 2:
+            self.coordinates[0][0] += 2
+
             self.coordinates[1][1] += 1
+            self.coordinates[1][0] += 1
 
             self.coordinates[2][1] += 2
 
-        if orientation == 0:
+        if orientation == 1:
             self.coordinates[0][1] -= 2
 
-            self.coordinates[1][0] -= 1
             self.coordinates[1][1] -= 1
+            self.coordinates[1][0] += 1
 
-            self.coordinates[2][0] -= 2
+            self.coordinates[2][0] += 2
+
+        if orientation == 0:
+            self.coordinates[0][0] -= 2
+
+            self.coordinates[1][1] -= 1
+            self.coordinates[1][0] -= 1
+
+            self.coordinates[2][1] -= 2
