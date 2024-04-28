@@ -10,6 +10,13 @@ class TetrisPieces(ABC):
     Abstract class for tetris pieces
 
     Attributes:
+        RED: tuple representing RGB values for red
+        GREEN: tuple representing RGB values for green
+        BLUE: tuple representing RGB values for blue
+        CYAN: tuple representing RGB values for cyan
+        YELLOW: tuple representing RGB values for yellow
+        MAGENTA: tuple representing RGB values for magenta
+        ORANGE: tuple representing RGB values for orange
     """
 
     # Colors
@@ -20,8 +27,6 @@ class TetrisPieces(ABC):
     YELLOW = (255, 255, 0)
     MAGENTA = (128, 0, 128)
     ORANGE = (255, 127, 0)
-
-    colors = [RED, GREEN, BLUE, CYAN, YELLOW, MAGENTA, ORANGE]
 
     def __init__(self, coordinates):
         self.coordinates = coordinates
@@ -90,12 +95,19 @@ class OPiece(TetrisPieces):
     def color(self):
         """
         Sets color of piece to yellow.
+
+        Returns:
+            a tuple representing the RBG color value
         """
         return TetrisPieces.YELLOW
 
     def full_piece(self):
         """
         Sets the coordinate of each block in the piece.
+
+        Returns:
+            a list of 4 lists, containing the coordinates of each block
+            in the piece
         """
         return [
             self.coordinates,
@@ -119,6 +131,9 @@ class IPiece(TetrisPieces):
     def color(self):
         """
         Method that sets color of piece to cyan.
+
+        Returns:
+            a tuple representing the RBG color value
         """
         return TetrisPieces.CYAN
 
