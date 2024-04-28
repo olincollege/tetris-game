@@ -27,8 +27,7 @@ class TetrisPieces(ABC):
         self.coordinates = coordinates
 
     def fall(self):
-        for square in self.coordinates:
-            square[0] -= 1
+        self.coordinates[0] += 1
 
     def move_left(self):
         try:
