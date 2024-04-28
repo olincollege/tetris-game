@@ -3,26 +3,24 @@ from pygame.locals import QUIT
 
 pygame.init()
 
-screen = pygame.display.set_mode([500, 1000])
 
-running = True
+class TetrisView(self):
 
-T = [[0, 0], [1, 0], [2, 0], [1, 1]]
+    def __init__(self):
+        self._board = board
 
-while running:
-    for event in pygame.event.get():
-        if event.type == QUIT:
-            running = False
+    def draw_board(self):
 
-    screen.fill((0, 0, 0))
+        screen = pygame.display.set_mode([500, 1000])
+        # this might have to be moved to the main file
 
-    surf = pygame.Surface((50, 50))
-    surf.fill((255, 0, 0))
+        screen.fill((0, 0, 0))
 
-    for coordinate in T:
+        for i, row in enumerate(self._board):
+            for j, square in enumerate(row):
+                if square != " ":
+                    surf = pygame.Surface((50, 50))
+                    surf.fill(square[1])
+                    screen.blit(surf, (j * 50, i * 50))
 
-        column = coordinate[0] * 50
-        row = coordinate[1] * 50
-        screen.blit(surf, (column, row))
-
-    pygame.display.flip()
+        pygame.display.flip()
