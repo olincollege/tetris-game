@@ -3,15 +3,15 @@
 # If at least one square is a space then it is not full.
 # import TetrisListPiece
 # import TetrisRelativePieces
-import TetrisRelativePiecesCopy
+import RelativePiecesForBoard
 import random
 
 
 class TetrisBoard:
     piece_types = [
-        TetrisRelativePiecesCopy.JPiece([3, 2]),
-        TetrisRelativePiecesCopy.LPiece([3, 2]),
-        TetrisRelativePiecesCopy.TPiece([3, 2]),
+        RelativePiecesForBoard.JPiece([2, 3]),
+        RelativePiecesForBoard.LPiece([2, 3]),
+        RelativePiecesForBoard.TPiece([2, 3]),
     ]
 
     def __init__(self):
@@ -23,6 +23,7 @@ class TetrisBoard:
             board.append(rows[:])  # rows is sliced so that a change to one row
             # ...only affects one row
         self._board = board
+        self._active_piece = None
 
     def check_all_rows(self):
         """
@@ -54,11 +55,48 @@ class TetrisBoard:
         ###...to each other later on which could cause issues
 
     def add_rel_piece(self):
-        active_piece = random.choice(TetrisBoard.piece_types)
-        for i in active_piece.full_piece():
+        self._active_piece = random.choice(TetrisBoard.piece_types)
+        for i in self._active_piece.full_piece():
             print(i)
             print(self._board[i[1]][i[0]])
-            self._board[i[1]][i[0]] = "X"
+            self._board[i[0]][i[1]] = ["Active", self._active_piece.color()]
+
+    def update_piece(self):
+        # function uses indices because I had trouble replacing active
+        # pieces with spaces only iterating through each value
+        for i in range(len(self._board)):
+            for j in range(len(self._board[i])):
+                if self._board[i][j][0] == "Active":
+                    self._board[i][j] = " "
+                    print("deleted")
+        for i in self._active_piece.full_piece():
+            self._board[i[0]][i[1]] = [
+                "Active",
+                self._active_piece.color(),
+                "Updated",
+            ]
+
+    def place_piece(self):
+        for i in self._board:
+            for j in i:
+                if "Active" in j:
+                    j[0] = "Inactive"
+
+    def drop_active_piece(self):
+        piece_under_active = False
+        try:
+            for i in self._active_piece.full_piece():
+                if self._board[i[0]][i[1]][0] == "Inactive":
+                    piece_under_active = True
+            if piece_under_active == False:
+                print(self._active_piece.full_piece())
+                self._active_piece.fall()
+                print(self._active_piece.full_piece())
+                self.update_piece()
+            else:
+                self.place_piece()
+        except IndexError:
+            self.place_piece()
 
     #    def add_piece(self):
     #        ActivePiece = random.choice(TetrisBoard.piece_types)
