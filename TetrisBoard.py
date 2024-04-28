@@ -68,7 +68,6 @@ class TetrisBoard:
             for j in range(len(self._board[i])):
                 if self._board[i][j][0] == "Active":
                     self._board[i][j] = " "
-                    print("deleted")
         for i in self._active_piece.full_piece():
             self._board[i[0]][i[1]] = [
                 "Active",
@@ -86,17 +85,41 @@ class TetrisBoard:
         piece_under_active = False
         try:
             for i in self._active_piece.full_piece():
-                if self._board[i[0]][i[1]][0] == "Inactive":
+                if self._board[i[0] + 1][i[1]][0] == "Inactive":
                     piece_under_active = True
-            if piece_under_active == False:
-                print(self._active_piece.full_piece())
+            if piece_under_active is False:
                 self._active_piece.fall()
-                print(self._active_piece.full_piece())
                 self.update_piece()
             else:
                 self.place_piece()
         except IndexError:
             self.place_piece()
+
+    def move_active_piece_left(self):
+        piece_to_left = False
+        try:
+            for i in self._active_piece.full_piece():
+                if self._board[i[0]][i[1] - 1][0] == "Inactive" or i[1] == 0:
+                    piece_to_left = True
+            if piece_to_left is False:
+                print(self._active_piece.full_piece())
+                self._active_piece.move_left()
+                print(self._active_piece.full_piece())
+                self.update_piece()
+        except IndexError:
+            pass
+
+    def move_active_piece_right(self):
+        piece_to_right = False
+        try:
+            for i in self._active_piece.full_piece():
+                if self._board[i[0]][i[1] + 1][0] == "Inactive" or i[1] == 9:
+                    piece_to_right = True
+            if piece_to_right is False:
+                self._active_piece.move_right()
+                self.update_piece()
+        except IndexError:
+            pass
 
     #    def add_piece(self):
     #        ActivePiece = random.choice(TetrisBoard.piece_types)
@@ -118,4 +141,7 @@ class TetrisBoard:
     # Should run before a piece falls a space
 
     def __repr__(self):
-        return str(self._board)
+        repr_str = ""
+        for i in self._board:
+            repr_str = repr_str + str(i) + "\n"
+        return repr_str
