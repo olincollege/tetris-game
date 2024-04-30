@@ -4,9 +4,9 @@ from pygame.locals import QUIT
 pygame.init()
 
 
-class TetrisView(self):
+class TetrisView:
 
-    def __init__(self):
+    def __init__(self, board):
         self._board = board
 
     def draw_board(self):

@@ -30,6 +30,7 @@ class TetrisPieces(ABC):
 
     def __init__(self, coordinates):
         self.coordinates = coordinates
+        self._orientation = 0
 
     def fall(self):
         """
@@ -166,7 +167,7 @@ class IPiece(TetrisPieces):
                 self.coordinates[i][1] -= i
 
     def rotate_ccw(self, orientation):
-        pass
+        self.rotate_cw(orientation)
 
 
 class JPiece(TetrisPieces):
@@ -203,7 +204,7 @@ class JPiece(TetrisPieces):
         """
         Method to rotate piece clockwise.
         """
-        if orientation == 1:
+        if orientation % 4 == 1:
             self.coordinates[0][1] += 1
 
             self.coordinates[1][0] -= 1
@@ -213,7 +214,7 @@ class JPiece(TetrisPieces):
             self.coordinates[3][1] -= 2
             self.coordinates[3][0] += 1
 
-        elif orientation == 2:
+        elif orientation % 4 == 2:
             self.coordinates[0][1] += 1
             self.coordinates[0][0] += 1
 
@@ -224,7 +225,7 @@ class JPiece(TetrisPieces):
 
             self.coordinates[3][0] -= 2
 
-        elif orientation == 3:
+        elif orientation % 4 == 3:
             self.coordinates[0][1] -= 1
             self.coordinates[0][0] += 1
 
@@ -235,7 +236,7 @@ class JPiece(TetrisPieces):
 
             self.coordinates[3][1] += 2
 
-        elif orientation == 0:
+        elif orientation % 4 == 0:
             self.coordinates[0][1] -= 1
             self.coordinates[0][0] -= 2
 
@@ -250,7 +251,7 @@ class JPiece(TetrisPieces):
         """
         Method to rotate piece counter-clockwise.
         """
-        if orientation == 3:
+        if orientation % 4 == 3:
             self.coordinates[0][1] += 1
             self.coordinates[0][0] += 2
 
@@ -261,7 +262,7 @@ class JPiece(TetrisPieces):
 
             self.coordinates[3][0] -= 1
 
-        elif orientation == 2:
+        elif orientation % 4 == 2:
             self.coordinates[0][1] += 1
             self.coordinates[0][0] -= 1
 
@@ -272,7 +273,7 @@ class JPiece(TetrisPieces):
 
             self.coordinates[3][1] -= 2
 
-        elif orientation == 1:
+        elif orientation % 4 == 1:
             self.coordinates[0][1] -= 1
             self.coordinates[0][0] -= 1
 
@@ -283,7 +284,7 @@ class JPiece(TetrisPieces):
 
             self.coordinates[3][0] += 2
 
-        elif orientation == 0:
+        elif orientation % 4 == 0:
             self.coordinates[0][1] -= 1
 
             self.coordinates[1][0] += 1
@@ -328,7 +329,7 @@ class LPiece(TetrisPieces):
         """
         Method to rotate piece clockwise.
         """
-        if orientation == 1:
+        if orientation % 4 == 1:
             self.coordinates[0][1] += 1
             self.coordinates[0][0] += 1
 
@@ -337,7 +338,7 @@ class LPiece(TetrisPieces):
 
             self.coordinates[3][0] -= 2
 
-        elif orientation == 2:
+        elif orientation % 4 == 2:
             self.coordinates[0][1] += 1
 
             self.coordinates[1][0] += 1
@@ -348,7 +349,7 @@ class LPiece(TetrisPieces):
             self.coordinates[3][1] -= 2
             self.coordinates[3][0] += 1
 
-        elif orientation == 3:
+        elif orientation % 4 == 3:
             self.coordinates[0][0] -= 2
 
             self.coordinates[1][1] += 1
@@ -359,7 +360,7 @@ class LPiece(TetrisPieces):
             self.coordinates[3][1] += 1
             self.coordinates[3][0] += 1
 
-        elif orientation == 0:
+        elif orientation % 4 == 0:
             self.coordinates[0][1] -= 2
             self.coordinates[0][0] += 1
 
@@ -373,7 +374,7 @@ class LPiece(TetrisPieces):
         """
         Method to rotate piece counter-clockwise.
         """
-        if orientation == 3:
+        if orientation % 4 == 3:
             self.coordinates[0][1] += 2
             self.coordinates[0][0] -= 1
 
@@ -383,7 +384,7 @@ class LPiece(TetrisPieces):
 
             self.coordinates[3][1] -= 1
 
-        if orientation == 2:
+        if orientation % 4 == 2:
             self.coordinates[0][0] += 2
 
             self.coordinates[1][1] -= 1
@@ -394,7 +395,7 @@ class LPiece(TetrisPieces):
             self.coordinates[3][1] -= 1
             self.coordinates[3][0] -= 1
 
-        if orientation == 1:
+        if orientation % 4 == 1:
             self.coordinates[0][1] -= 1
 
             self.coordinates[1][0] -= 1
@@ -405,7 +406,7 @@ class LPiece(TetrisPieces):
             self.coordinates[3][1] += 2
             self.coordinates[3][0] -= 1
 
-        if orientation == 0:
+        if orientation % 4 == 0:
             self.coordinates[0][1] -= 1
             self.coordinates[0][0] -= 1
 
@@ -449,7 +450,7 @@ class SPiece(TetrisPieces):
         """
         Method to rotate piece clockwise.
         """
-        if orientation == 1:
+        if orientation % 2 == 1:
             self.coordinates[0][1] += 2
 
             self.coordinates[1][1] += 1
@@ -458,7 +459,7 @@ class SPiece(TetrisPieces):
             self.coordinates[3][1] -= 1
             self.coordinates[3][0] += 1
 
-        if orientation == 0:
+        if orientation % 2 == 0:
             self.coordinates[0][1] -= 2
 
             self.coordinates[1][1] -= 1
@@ -468,7 +469,7 @@ class SPiece(TetrisPieces):
             self.coordinates[3][0] -= 1
 
     def rotate_ccw(self, orientation):
-        pass
+        self.rotate_cw(orientation)
 
 
 class ZPiece(TetrisPieces):
@@ -505,7 +506,7 @@ class ZPiece(TetrisPieces):
         """
         Method to rotate piece clockwise.
         """
-        if orientation == 1:
+        if orientation % 2 == 1:
             self.coordinates[0][0] += 2
 
             self.coordinates[1][1] += 1
@@ -515,7 +516,7 @@ class ZPiece(TetrisPieces):
             self.coordinates[3][1] += 1
             self.coordinates[3][0] -= 1
 
-        if orientation == 0:
+        if orientation % 2 == 0:
             self.coordinates[0][0] -= 2
 
             self.coordinates[1][1] -= 1
@@ -526,7 +527,7 @@ class ZPiece(TetrisPieces):
             self.coordinates[3][0] += 1
 
     def rotate_ccw(self, orientation):
-        pass
+        self.rotate_cw(orientation)
 
 
 class TPiece(TetrisPieces):
@@ -563,7 +564,7 @@ class TPiece(TetrisPieces):
         """
         Method to rotate piece clockwise.
         """
-        if orientation == 1:
+        if orientation % 4 == 1:
             self.coordinates[0][0] += 2
 
             self.coordinates[1][1] += 1
@@ -571,7 +572,7 @@ class TPiece(TetrisPieces):
 
             self.coordinates[2][1] += 2
 
-        if orientation == 2:
+        if orientation % 4 == 2:
             self.coordinates[0][1] += 2
 
             self.coordinates[1][1] += 1
@@ -579,7 +580,7 @@ class TPiece(TetrisPieces):
 
             self.coordinates[2][0] -= 2
 
-        if orientation == 3:
+        if orientation % 4 == 3:
             self.coordinates[0][0] -= 2
 
             self.coordinates[1][1] -= 1
@@ -587,7 +588,7 @@ class TPiece(TetrisPieces):
 
             self.coordinates[2][1] -= 2
 
-        if orientation == 0:
+        if orientation % 4 == 0:
             self.coordinates[0][1] -= 2
 
             self.coordinates[1][1] -= 1
@@ -599,7 +600,7 @@ class TPiece(TetrisPieces):
         """
         Method to rotate piece counter-clockwise.
         """
-        if orientation == 3:
+        if orientation % 4 == 3:
             self.coordinates[0][1] += 2
 
             self.coordinates[1][1] += 1
@@ -607,7 +608,7 @@ class TPiece(TetrisPieces):
 
             self.coordinates[2][0] -= 2
 
-        if orientation == 2:
+        if orientation % 4 == 2:
             self.coordinates[0][0] += 2
 
             self.coordinates[1][1] += 1
@@ -615,7 +616,7 @@ class TPiece(TetrisPieces):
 
             self.coordinates[2][1] += 2
 
-        if orientation == 1:
+        if orientation % 4 == 1:
             self.coordinates[0][1] -= 2
 
             self.coordinates[1][1] -= 1
@@ -623,7 +624,7 @@ class TPiece(TetrisPieces):
 
             self.coordinates[2][0] += 2
 
-        if orientation == 0:
+        if orientation % 4 == 0:
             self.coordinates[0][0] -= 2
 
             self.coordinates[1][1] -= 1

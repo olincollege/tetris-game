@@ -3,19 +3,19 @@
 # If at least one square is a space then it is not full.
 # import TetrisListPiece
 # import TetrisRelativePieces
-import RelativePiecesForBoard
+import SemiRelativePiecesForBoard
 import random
 
 
 class TetrisBoard:
     piece_types = [
-        RelativePiecesForBoard.LPiece([2, 3]),
-        RelativePiecesForBoard.IPiece([2, 3]),
-        RelativePiecesForBoard.SPiece([2, 3]),
-        RelativePiecesForBoard.ZPiece([2, 3]),
-        RelativePiecesForBoard.TPiece([2, 3]),
-        RelativePiecesForBoard.OPiece([2, 3]),
-        RelativePiecesForBoard.JPiece([2, 3]),
+        SemiRelativePiecesForBoard.LPiece([2, 3]),
+        SemiRelativePiecesForBoard.IPiece([2, 3]),
+        SemiRelativePiecesForBoard.SPiece([2, 3]),
+        SemiRelativePiecesForBoard.ZPiece([2, 3]),
+        SemiRelativePiecesForBoard.TPiece([2, 3]),
+        SemiRelativePiecesForBoard.OPiece([2, 3]),
+        SemiRelativePiecesForBoard.JPiece([2, 3]),
     ]
 
     def __init__(self):
@@ -56,9 +56,14 @@ class TetrisBoard:
         """
         del self._board[row_num]
         self._board.insert(0, self._board[0])  ###This may make each row equal
+        ###...to each other later on which could cause issues
+
+    def add_rel_piece(self):
+        rando_int = random.randint(0, 6)
+        #        self._active_piece = random.choice(TetrisBoard.piece_types)
+        self._active_piece = self.piece_types[rando_int]
+        print(rando_int)
         for i in self._active_piece.full_piece():
-            print(i)
-            print(self._board[i[1]][i[0]])
             self._board[i[0]][i[1]] = ["Active", self._active_piece.color()]
 
     def update_piece(self):
@@ -121,24 +126,35 @@ class TetrisBoard:
         except IndexError:
             pass
 
-    #    def add_piece(self):
-    #        ActivePiece = random.choice(TetrisBoard.piece_types)
+    def rotate_active_piece_cw(self):
+        can_rotate = True
+        self._active_piece.rotate_cw()
+        for i in self._active_piece.full_piece():
+            if i[0] >= 0 and i[0] < 24 and i[1] >= 0 and i[1] < 10:
+                if self._board[i[0]][i[1]][0] != "Inactive":
+                    pass
+                else:
+                    can_rotate = False
+            else:
+                can_rotate = False
+        if can_rotate is False:
+            self._active_piece.rotate_ccw()
+        self.update_piece()
 
-    # def add_piece(self):
-    #        ActivePiece = TetrisListPiece.TetrisPiece()
-    #        square_dim = len(ActivePiece.piece[0])
-    #        for i in range(square_dim):
-    #            base = [" " for j in range(10)]
-    #            for
-    #            base[3 : 3 + square_dim] = (
-    #                ActivePiece.piece[0][i],
-    #                ActivePiece.color,
-    #                "active",
-    #            )
-    #            self._board[i] = base
-
-    # def check_fallen_piece(self):
-    # Should run before a piece falls a space
+    def rotate_active_piece_ccw(self):
+        can_rotate = True
+        self._active_piece.rotate_ccw()
+        for i in self._active_piece.full_piece():
+            if i[0] >= 0 and i[0] < 24 and i[1] >= 0 and i[1] < 10:
+                if self._board[i[0]][i[1]][0] != "Inactive":
+                    pass
+                else:
+                    can_rotate = False
+            else:
+                can_rotate = False
+        if can_rotate is False:
+            self._active_piece.rotate_cw()
+        self.update_piece()
 
     def __repr__(self):
         repr_str = ""
