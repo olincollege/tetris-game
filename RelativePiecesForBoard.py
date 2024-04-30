@@ -42,8 +42,7 @@ class TetrisPieces(ABC):
         Method to move the piece to the left
         """
         try:
-            for square in self.coordinates:
-                square[1] -= 1
+            self.coordinates[1] -= 1
         except IndexError:
             pass
 
@@ -52,8 +51,7 @@ class TetrisPieces(ABC):
         Method to move the piece to the right
         """
         try:
-            for square in self.coordinates:
-                square[1] += 1
+            self.coordinates[1] += 1
         except IndexError:
             pass
 
