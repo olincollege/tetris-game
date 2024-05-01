@@ -40,10 +40,10 @@ class TetrisView:
         # Game Over Screen
         if self._board._loss is True:
             pygame.draw.rect(screen, (255, 0, 0), pygame.Rect(0, 0, 400, 800))
-            game_over_font = pygame.font.SysFont("Arial", 50)
+            game_over_font = pygame.font.SysFont("Arial", 100)
             game_over = game_over_font.render(
                 "GAME OVER", True, (255, 255, 255)
             )
-            screen.blit(game_over, (150, 200))
+            screen.blit(game_over, (100, 200))
 
         pygame.display.flip()
