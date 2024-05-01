@@ -1,8 +1,7 @@
+"""This file is used to control the active piece in Tetris"""
+
 # importing all the required libraries
 import pygame
-from pygame.locals import *
-import sys
-
 
 # initiating pygame library to use it's
 # functions
@@ -10,9 +9,17 @@ pygame.init()
 
 
 class TetrisPressedController:
+    """
+    The controller class to move active pieces
+    """
 
     def __init__(self, board):
+        """
+        Constructs the controller class
 
+        Args:
+            board: (board class): the board to control
+        """
         self.board = board
         self._left_thresh = 0
         self._right_thresh = 0
@@ -22,6 +29,9 @@ class TetrisPressedController:
         self._drop_lock = False
 
     def control_piece(self):
+        """
+        A function to control the piece based on buttons pressed
+        """
         presses = pygame.key.get_pressed()
         if presses[pygame.K_LEFT]:
             if self._left_thresh == 0 or (
@@ -61,6 +71,3 @@ class TetrisPressedController:
             self._down_lock = False
         if not presses[pygame.K_SPACE]:
             self._drop_lock = False
-
-            # elif event.key == K_z:
-            #     return self.piece.fall_faster()

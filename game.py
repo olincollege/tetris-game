@@ -39,6 +39,7 @@ def main():
             if i % 1 == 0:
                 view.draw_board()
         print(board.points)
+        board.check_loss()
 
     pygame.quit()
 
