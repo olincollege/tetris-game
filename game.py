@@ -28,10 +28,7 @@ def main():
             i += 1
 
         board.drop_active_piece()
-        # if i % 3 == 0:
-        #     board.move_active_piece_left()
-        # if i % 3 == 1:
-        #     board.move_active_piece_right()
+
         for i in range(10):
             controller.control_piece()
             clock.tick(20 + 2 * board.level)
