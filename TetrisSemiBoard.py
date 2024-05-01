@@ -325,6 +325,16 @@ class TetrisBoard:  # pylint: disable=too-many-instance-attributes
         """
         return self._loss
 
+    @property
+    def active_piece(self):
+        """
+        property for self._active_piece
+
+        Returns:
+            self._active_piece: (active piece type) the currently active piece
+        """
+        return self._active_piece
+
     def __repr__(self):
         """
         Prints the state of the board
