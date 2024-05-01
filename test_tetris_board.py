@@ -17,12 +17,3 @@ def test_check_row(board):
     """
 
     assert board.check_row(4) is False
-
-
-# def test__repr__(capsys, board):
-
-#     print(board)
-#     captured = capsys.readouterr()
-
-#     assert (
-#         captured.out
