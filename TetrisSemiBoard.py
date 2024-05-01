@@ -315,6 +315,16 @@ class TetrisBoard:  # pylint: disable=too-many-instance-attributes
         """
         return self._level
 
+    @property
+    def loss(self):
+        """
+        property for self._loss
+
+        Returns:
+            self._loss: (bool) a bool representing if the game is lost
+        """
+        return self._loss
+
     def __repr__(self):
         """
         Prints the state of the board
