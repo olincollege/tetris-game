@@ -133,6 +133,7 @@ class TetrisBoard:
             for j in i:
                 if "Active" in j:
                     j[0] = "Inactive"
+        self._active_piece = None
 
     def drop_active_piece(self):
         """
@@ -148,6 +149,7 @@ class TetrisBoard:
                 self.update_piece()
             else:
                 self.place_piece()
+                print("No Error")
         except IndexError:
             self.place_piece()
 
@@ -155,6 +157,8 @@ class TetrisBoard:
         """
         Moves an active piece to the left unless it cannot move more left
         """
+        if self._active_piece is None:
+            return None
         piece_to_left = False
         try:
             for i in self._active_piece.full_piece():

@@ -20,14 +20,16 @@ def main():
             if event.type == QUIT:
                 running = False
 
-        board.add_new_piece_if_none()  # Check and add a new piece if none exists
+        print(board._active_piece)
+        if board._active_piece is None:
+            board.add_rel_piece()  # Check and add a new piece if none exists
 
         controller.control_piece()
         board.drop_active_piece()
         board.move_active_piece_left()
         view.draw_board()
 
-        clock.tick(1)
+        clock.tick(5)
 
     pygame.quit()
 
