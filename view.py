@@ -7,7 +7,7 @@ class TetrisView:
 
     def draw_board(self):
         # Create game window
-        screen = pygame.display.set_mode([600, 800])
+        screen = pygame.display.set_mode([700, 800])
         screen.fill((0, 0, 0))
 
         # Line separating game fron score and controls info
@@ -15,8 +15,10 @@ class TetrisView:
 
         # Score info
         font = pygame.font.SysFont("Arial", 36)
-        txtsurf = font.render(str(self._board.score), True, (255, 255, 255))
-        screen.blit(txtsurf, (650, 400))
+        txtsurf = font.render("Score:", True, (255, 255, 255))
+        screen.blit(txtsurf, (500, 400))
+        score_num = font.render(f"{self._board.points}", True, (255, 255, 255))
+        screen.blit(score_num, (550, 450))
 
         # Get the screen height
         screen_height = screen.get_height()
