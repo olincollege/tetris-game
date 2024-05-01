@@ -2,10 +2,17 @@ import pygame
 
 
 class TetrisView:
+    """
+    A class that represents the user view of the tetris game
+    """
+
     def __init__(self, board):
         self._board = board  # Store the TetrisBoard object
 
     def draw_board(self):
+        """
+        Method to visually represent the tetris board and player's score
+        """
         # Create game window
         screen = pygame.display.set_mode([700, 800])
         screen.fill((0, 0, 0))
