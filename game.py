@@ -2,8 +2,8 @@
 
 import pygame
 from pygame.locals import QUIT, KEYDOWN
-from TetrisSemiBoard import TetrisBoard
-from TetrisPressedController import TetrisPressedController
+from tetris_board import TetrisBoard
+from tetris_controller import TetrisPressedController
 from view import TetrisView
 
 
