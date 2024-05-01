@@ -24,7 +24,7 @@ def main():
 
         controller.control_piece()
         board.drop_active_piece()
-        board.move_active_piece_right()
+        board.move_active_piece_left()
         view.draw_board()
 
         clock.tick(1)

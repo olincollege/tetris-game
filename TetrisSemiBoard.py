@@ -40,7 +40,7 @@ class TetrisBoard:
         board = []
         for _ in range(24):
             board.append(rows[:])  # rows is sliced so that a change to one row
-            # ...only affects one row
+            # ...only affects one row (removes aliasing between rows)
         self._board = board
         self._active_piece = None
         self._unseen_row = 4
@@ -88,9 +88,7 @@ class TetrisBoard:
         Adds a randomly-shaped active piece to the game
         """
         rando_int = random.randint(0, 6)
-        #        self._active_piece = random.choice(TetrisBoard.piece_types)
         self._active_piece = self.piece_types[rando_int]
-        # print(rando_int)
         for i in self._active_piece.full_piece():
             self._board[i[0]][i[1]] = ["Active", self._active_piece.color()]
 
@@ -163,9 +161,7 @@ class TetrisBoard:
                 if self._board[i[0]][i[1] - 1][0] == "Inactive" or i[1] == 0:
                     piece_to_left = True
             if piece_to_left is False:
-                print(self._active_piece.full_piece())
                 self._active_piece.move_left()
-                print(self._active_piece.full_piece())
                 self.update_piece()
         except IndexError:
             pass

@@ -13,7 +13,7 @@ class TetrisView:
         screen_height = screen.get_height()
 
         # Determine the number of rows to display based on screen height
-        rows_to_display = min(len(self._board._board), screen_height // 40)
+        rows_to_display = min(len(self._board.board), screen_height // 40)
         # print(rows_to_display, "ROWSROWS")
         # print(self._board._board)
 
