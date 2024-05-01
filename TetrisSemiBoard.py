@@ -147,6 +147,9 @@ class TetrisBoard:  # pylint: disable=too-many-instance-attributes
         # function uses indices because I had trouble replacing active
         # pieces with spaces only iterating through each value
         # pylint: disable-next=consider-using-enumerate
+        self.check_loss()
+        if self._active_piece is None:
+            return
         for i in range(len(self._board)):
             for j in range(len(self._board[i])):
                 if self._board[i][j][0] == "Active":
@@ -157,7 +160,6 @@ class TetrisBoard:  # pylint: disable=too-many-instance-attributes
                 self._active_piece.color(),
                 "Updated",
             ]
-        self.check_loss()
 
     def has_active_piece(self):
         """
@@ -201,8 +203,10 @@ class TetrisBoard:  # pylint: disable=too-many-instance-attributes
                 self.update_piece()
             else:
                 self.place_piece()
+                self.update_piece()
         except IndexError:
             self.place_piece()
+            self.update_piece()
 
     def full_drop(self):
         """
