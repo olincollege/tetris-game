@@ -3,7 +3,16 @@
 # If at least one square is a space then it is not full.
 # import TetrisListPiece
 # import TetrisRelativePieces
-import SemiRelativePiecesForBoard
+from SemiRelativePiecesForBoard import (
+    TetrisPieces,
+    OPiece,
+    IPiece,
+    SPiece,
+    ZPiece,
+    LPiece,
+    JPiece,
+    TPiece,
+)
 import random
 
 
@@ -15,14 +24,24 @@ class TetrisBoard:
         piece_types: (list) a list of all 7 Tetris piece types as classes
     """
 
+    # piece_types = [
+    #     SemiRelativePiecesForBoard.LPiece([2, 3]),
+    #     SemiRelativePiecesForBoard.IPiece([2, 3]),
+    #     SemiRelativePiecesForBoard.SPiece([2, 3]),
+    #     SemiRelativePiecesForBoard.ZPiece([2, 3]),
+    #     SemiRelativePiecesForBoard.TPiece([2, 3]),
+    #     SemiRelativePiecesForBoard.OPiece([2, 3]),
+    #     SemiRelativePiecesForBoard.JPiece([2, 3]),
+    # ]
+
     piece_types = [
-        SemiRelativePiecesForBoard.LPiece([2, 3]),
-        SemiRelativePiecesForBoard.IPiece([2, 3]),
-        SemiRelativePiecesForBoard.SPiece([2, 3]),
-        SemiRelativePiecesForBoard.ZPiece([2, 3]),
-        SemiRelativePiecesForBoard.TPiece([2, 3]),
-        SemiRelativePiecesForBoard.OPiece([2, 3]),
-        SemiRelativePiecesForBoard.JPiece([2, 3]),
+        LPiece,
+        IPiece,
+        SPiece,
+        ZPiece,
+        TPiece,
+        OPiece,
+        JPiece,
     ]
 
     def __init__(self):
@@ -88,7 +107,7 @@ class TetrisBoard:
         Adds a randomly-shaped active piece to the game
         """
         rando_int = random.randint(0, 6)
-        self._active_piece = self.piece_types[rando_int]
+        self._active_piece = self.piece_types[rando_int]([2, 3])
         for i in self._active_piece.full_piece():
             self._board[i[0]][i[1]] = ["Active", self._active_piece.color()]
 
