@@ -15,6 +15,7 @@ from SemiRelativePiecesForBoard import (
 )
 
 
+# pylint: disable-next=too-many-public-methods
 class TetrisBoard:  # pylint: disable=too-many-instance-attributes
     """
     A board for use in the game tetris
