@@ -308,6 +308,16 @@ class TetrisBoard:
         """
         return int(self._points)
 
+    @property
+    def level(self):
+        """
+        property for self._level
+
+        Returns:
+            self._level: (int) an int representing level
+        """
+        return self._level
+
     def __repr__(self):
         """
         Prints the state of the board
