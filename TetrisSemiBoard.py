@@ -1,10 +1,10 @@
-# Currently, this code only creates a list of lists and checks to see if
-# rows are full. It checks that by seeing if each pixel in a row is a space.
-# If at least one square is a space then it is not full.
-# import TetrisListPiece
-# import TetrisRelativePieces
+"""
+This is the board class which handles the board and anything within it
+(such as movement, dropping, placing pieces, points, the level, etc.)
+"""
+
+import random
 from SemiRelativePiecesForBoard import (
-    TetrisPieces,
     OPiece,
     IPiece,
     SPiece,
@@ -13,26 +13,15 @@ from SemiRelativePiecesForBoard import (
     JPiece,
     TPiece,
 )
-import random
 
 
-class TetrisBoard:
+class TetrisBoard:  # pylint: disable=too-many-instance-attributes
     """
     A board for use in the game tetris
 
     Attributes:
         piece_types: (list) a list of all 7 Tetris piece types as classes
     """
-
-    # piece_types = [
-    #     SemiRelativePiecesForBoard.LPiece([2, 3]),
-    #     SemiRelativePiecesForBoard.IPiece([2, 3]),
-    #     SemiRelativePiecesForBoard.SPiece([2, 3]),
-    #     SemiRelativePiecesForBoard.ZPiece([2, 3]),
-    #     SemiRelativePiecesForBoard.TPiece([2, 3]),
-    #     SemiRelativePiecesForBoard.OPiece([2, 3]),
-    #     SemiRelativePiecesForBoard.JPiece([2, 3]),
-    # ]
 
     piece_types = [
         LPiece,
@@ -68,7 +57,6 @@ class TetrisBoard:
         self._points = 0
         self._clears = 0
         self._level = 0
-        self._tetris_check = False
 
     def add_z_points(self):
         """
@@ -125,20 +113,26 @@ class TetrisBoard:
         self._points += 100 * (1 + self._level / 10)
 
     def check_loss(self):
+        """
+        Checks if the game is lost or not
+        """
         for i in self._board[self._loss_row]:
             if i[0] == "Inactive":
                 self._loss = True
 
     def fill_bag(self):
+        """
+        Fills the board's piece bag with each tetris piece twice
+        """
         for _ in range(2):
             for i in self.piece_types:
-                self._bag.append(i([2, 3]))
+                self._bag.append(i([2, 5]))
 
     def add_rel_piece(self):
         """
         Adds a randomly-shaped active piece to the game
         """
-        if self._bag == []:
+        if not self._bag:
             self.fill_bag()
         rando_int = random.randint(0, len(self._bag) - 1)
         self._active_piece = self._bag.pop(rando_int)
@@ -195,7 +189,7 @@ class TetrisBoard:
         Lowers an active piece's vertical position by one square
         """
         if self._active_piece is None:
-            return None
+            return
         piece_under_active = False
         try:
             for i in self._active_piece.full_piece():
@@ -210,7 +204,10 @@ class TetrisBoard:
             self.place_piece()
 
     def full_drop(self):
-        while self._active_piece != None:
+        """
+        Fully drops pieces and awards points based on number of squares dropped
+        """
+        while self._active_piece is not None:
             self.drop_active_piece()
             self._points = self._points + (5 + self._level * 2.5)
 
@@ -219,7 +216,7 @@ class TetrisBoard:
         Moves an active piece to the left unless it cannot move more left
         """
         if self._active_piece is None:
-            return None
+            return
         piece_to_left = False
         try:
             for i in self._active_piece.full_piece():
@@ -236,7 +233,7 @@ class TetrisBoard:
         Moves an active piece to the right unless it cannot move more right
         """
         if self._active_piece is None:
-            return None
+            return
         piece_to_right = False
         try:
             for i in self._active_piece.full_piece():
@@ -253,7 +250,7 @@ class TetrisBoard:
         Rotates the active piece clockwise unless it cannot rotate
         """
         if self._active_piece is None:
-            return None
+            return
         can_rotate = True
         self._active_piece.rotate_cw()
         for i in self._active_piece.full_piece():
@@ -273,7 +270,7 @@ class TetrisBoard:
         Rotates the active piece counterclockwise unless it cannot rotate
         """
         if self._active_piece is None:
-            return None
+            return
         can_rotate = True
         self._active_piece.rotate_ccw()
         for i in self._active_piece.full_piece():
