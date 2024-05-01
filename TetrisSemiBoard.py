@@ -62,8 +62,19 @@ class TetrisBoard:
             # ...only affects one row (removes aliasing between rows)
         self._board = board
         self._active_piece = None
-        self._unseen_row = 4
+        self._loss_row = 4
+        self._loss = False
         self._bag = []
+        self._points = 0
+        self._clears = 0
+        self._level = 0
+        self._tetris_check = False
+
+    def add_z_points(self):
+        """
+        Adds points based on z presses
+        """
+        self._points = self._points + (2 + self._level / 2)
 
     def check_all_rows(self):
         """
@@ -72,8 +83,12 @@ class TetrisBoard:
         # The tetris board list may be modifed as this runs due to rows
         # clearing, but since rows can not go "up" in the board, this
         # should be fine and there should be no index errors or skips
+        clears = 0
         for i in range(len(self._board)):
-            self.check_row(i)
+            if self.check_row(i):
+                clears += 1
+        if clears == 4:
+            self._points = self._points + (600 + self._level * 500)
 
     def check_row(self, row_num):
         """
@@ -81,6 +96,8 @@ class TetrisBoard:
 
         Args:
             row_num: (int) the row to check
+        Returns:
+            True if a row is cleared, false otherwise
         """
         row_is_full = True
         for i in self._board[row_num]:
@@ -88,6 +105,8 @@ class TetrisBoard:
                 row_is_full = False
         if row_is_full:
             self.row_clear(row_num)
+            return True
+        return False
 
     def row_clear(self, row_num):
         """
@@ -101,7 +120,14 @@ class TetrisBoard:
         for _ in range(10):
             new_row.append(" ")
         self._board.insert(0, new_row)
-        ###...to each other later on which could cause issues
+        self._clears += 1
+        self._level = self._clears // 10
+        self._points += 100 * (1 + self._level / 10)
+
+    def check_loss(self):
+        for i in self._board[self._loss_row]:
+            if i[0] == "Inactive":
+                self._loss = True
 
     def fill_bag(self):
         for _ in range(2):
@@ -136,6 +162,7 @@ class TetrisBoard:
                 self._active_piece.color(),
                 "Updated",
             ]
+        self.check_loss()
 
     def has_active_piece(self):
         """
@@ -161,11 +188,14 @@ class TetrisBoard:
                 if "Active" in j:
                     j[0] = "Inactive"
         self._active_piece = None
+        self.check_all_rows()
 
     def drop_active_piece(self):
         """
         Lowers an active piece's vertical position by one square
         """
+        if self._active_piece is None:
+            return None
         piece_under_active = False
         try:
             for i in self._active_piece.full_piece():
@@ -176,9 +206,13 @@ class TetrisBoard:
                 self.update_piece()
             else:
                 self.place_piece()
-                print("No Error")
         except IndexError:
             self.place_piece()
+
+    def full_drop(self):
+        while self._active_piece != None:
+            self.drop_active_piece()
+            self._points = self._points + (5 + self._level * 2.5)
 
     def move_active_piece_left(self):
         """
@@ -218,6 +252,8 @@ class TetrisBoard:
         """
         Rotates the active piece clockwise unless it cannot rotate
         """
+        if self._active_piece is None:
+            return None
         can_rotate = True
         self._active_piece.rotate_cw()
         for i in self._active_piece.full_piece():
@@ -236,6 +272,8 @@ class TetrisBoard:
         """
         Rotates the active piece counterclockwise unless it cannot rotate
         """
+        if self._active_piece is None:
+            return None
         can_rotate = True
         self._active_piece.rotate_ccw()
         for i in self._active_piece.full_piece():
@@ -259,6 +297,26 @@ class TetrisBoard:
             self._board: (list) a list representing the board
         """
         return self._board
+
+    @property
+    def points(self):
+        """
+        property for self._points
+
+        Returns:
+            self._points: (int) an int representing points
+        """
+        return int(self._points)
+
+    @property
+    def level(self):
+        """
+        property for self._level
+
+        Returns:
+            self._level: (int) an int representing level
+        """
+        return self._level
 
     def __repr__(self):
         """
