@@ -62,7 +62,7 @@ class TetrisBoard:
         rando_int = random.randint(0, 6)
         #        self._active_piece = random.choice(TetrisBoard.piece_types)
         self._active_piece = self.piece_types[rando_int]
-        print(rando_int)
+        # print(rando_int)
         for i in self._active_piece.full_piece():
             self._board[i[0]][i[1]] = ["Active", self._active_piece.color()]
 
@@ -79,6 +79,21 @@ class TetrisBoard:
                 self._active_piece.color(),
                 "Updated",
             ]
+
+    def has_active_piece(self):
+        """
+        Check if there is an active piece on the board.
+        Returns:
+            bool: True if there is an active piece, False otherwise.
+        """
+        return self._active_piece is not None
+
+    def add_new_piece_if_none(self):
+        """
+        Add a new active piece to the board if there is no active piece.
+        """
+        if not self.has_active_piece():
+            self.add_rel_piece()
 
     def place_piece(self):
         for i in self._board:
