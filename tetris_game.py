@@ -4,7 +4,7 @@ import pygame
 from pygame.locals import QUIT, KEYDOWN
 from tetris_board import TetrisBoard
 from tetris_controller import TetrisPressedController
-from view import TetrisView
+from tetris_view import TetrisView
 
 
 def main():
