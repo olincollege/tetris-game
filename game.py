@@ -13,7 +13,6 @@ def main():
     board = TetrisBoard()
     controller = TetrisPressedController(board)
     view = TetrisView(board)
-
     clock = pygame.time.Clock()
 
     running = True
@@ -35,7 +34,7 @@ def main():
         #     board.move_active_piece_right()
         for i in range(10):
             controller.control_piece()
-            clock.tick(20)
+            clock.tick(20 + 2 * board.level)
             if i % 1 == 0:
                 view.draw_board()
         print(board.points)
