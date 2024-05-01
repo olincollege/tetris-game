@@ -14,7 +14,7 @@ pip install pygame
 
 ## Running the Game
 
-To run the game on your computer run the following command:
+ To run the game on your computer, clone our repository to your computer and run the following command:
 ```
-Insert command here
+python game.py
 ```
