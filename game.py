@@ -9,7 +9,7 @@ from view import TetrisView
 def main():
     i = 0
     pygame.init()
-
+    pygame.display.set_caption("Tetris")
     board = TetrisBoard()
     controller = TetrisPressedController(board)
     view = TetrisView(board)
