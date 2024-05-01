@@ -4,7 +4,7 @@ This is the board class which handles the board and anything within it
 """
 
 import random
-from board_pieces import (
+from tetris_pieces import (
     OPiece,
     IPiece,
     SPiece,
