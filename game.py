@@ -1,12 +1,16 @@
+"""A file that combines the tetris board and controller to run Tetris"""
+
 import pygame
-from pygame.locals import *
+from pygame.locals import QUIT, KEYDOWN
 from TetrisSemiBoard import TetrisBoard
-from TetrisController import TetrisController
 from TetrisPressedController import TetrisPressedController
 from view import TetrisView
 
 
 def main():
+    """
+    A function to run the game Tetris when the file is run
+    """
     i = 0
     pygame.init()
     pygame.display.set_caption("Tetris")
@@ -23,7 +27,7 @@ def main():
             if event.type == KEYDOWN:
                 controller.control_piece()
 
-        if board._active_piece is None:
+        if board.active_piece is None:
             board.add_rel_piece()  # Check and add a new piece if none exists
             i += 1
 

@@ -15,6 +15,7 @@ from SemiRelativePiecesForBoard import (
 )
 
 
+# pylint: disable-next=too-many-public-methods
 class TetrisBoard:  # pylint: disable=too-many-instance-attributes
     """
     A board for use in the game tetris
@@ -324,6 +325,16 @@ class TetrisBoard:  # pylint: disable=too-many-instance-attributes
             self._loss: (bool) a bool representing if the game is lost
         """
         return self._loss
+
+    @property
+    def active_piece(self):
+        """
+        property for self._active_piece
+
+        Returns:
+            self._active_piece: (active piece type) the currently active piece
+        """
+        return self._active_piece
 
     def __repr__(self):
         """
