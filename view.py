@@ -23,10 +23,8 @@ class TetrisView:
         screen.blit(score_num, (550, 450))
 
         # Get the screen height
-        screen_height = screen.get_height()
 
         # Determine the number of rows to display based on screen height
-        rows_to_display = min(len(self._board.board), screen_height // 40)
         # print(rows_to_display, "ROWSROWS")
         # print(self._board._board)
 
@@ -38,7 +36,7 @@ class TetrisView:
                     screen.blit(surf, (j * 40 + 1, i * 40 + 1))
 
         # Game Over Screen
-        if self._board._loss is True:
+        if self._board.loss is True:
             pygame.draw.rect(screen, (255, 0, 0), pygame.Rect(0, 0, 400, 800))
             game_over_font = pygame.font.SysFont("Arial", 100)
             game_over = game_over_font.render(

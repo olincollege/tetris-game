@@ -15,7 +15,6 @@ from SemiRelativePiecesForBoard import (
 )
 
 
-# pylint: disable-next=too-many-public-methods
 class TetrisBoard:  # pylint: disable=too-many-instance-attributes
     """
     A board for use in the game tetris
@@ -146,10 +145,10 @@ class TetrisBoard:  # pylint: disable=too-many-instance-attributes
         """
         # function uses indices because I had trouble replacing active
         # pieces with spaces only iterating through each value
-        # pylint: disable-next=consider-using-enumerate
         self.check_loss()
         if self._active_piece is None:
             return
+        # pylint: disable-next=consider-using-enumerate
         for i in range(len(self._board)):
             for j in range(len(self._board[i])):
                 if self._board[i][j][0] == "Active":
@@ -160,21 +159,6 @@ class TetrisBoard:  # pylint: disable=too-many-instance-attributes
                 self._active_piece.color(),
                 "Updated",
             ]
-
-    def has_active_piece(self):
-        """
-        Check if there is an active piece on the board.
-        Returns:
-            bool: True if there is an active piece, False otherwise.
-        """
-        return self._active_piece is not None
-
-    def add_new_piece_if_none(self):
-        """
-        Add a new active piece to the board if there is no active piece.
-        """
-        if not self.has_active_piece():
-            self.add_rel_piece()
 
     def place_piece(self):
         """
