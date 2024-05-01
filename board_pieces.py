@@ -80,7 +80,7 @@ class TetrisPieces(ABC):
         """
         Abstract method to set coordinates of full piece
         """
-        pass
+        pass  # pylint: disable=unnecessary-pass
 
     def rotate_cw(self):
         """
@@ -99,7 +99,7 @@ class TetrisPieces(ABC):
         """
         Abstract method to set the piece color
         """
-        pass
+        pass  # pylint: disable=unnecessary-pass
 
 
 # subclasses below
