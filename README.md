@@ -3,7 +3,7 @@
 ## Project Summary
 
 The purpose of this project was to use Python object-oriented programming to create a classic game of Tetris.
-The game was coded in Python with the Pygame library and designed with MVC architecture.
+The game was coded using Pygame library and designed with MVC architecture.
 
 ## Requirements
 
