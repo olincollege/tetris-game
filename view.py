@@ -44,6 +44,6 @@ class TetrisView:
             game_over = game_over_font.render(
                 "GAME OVER", True, (255, 255, 255)
             )
-            screen.blit(game_over, (100, 200))
+            screen.blit(game_over, (110, 200))
 
         pygame.display.flip()
