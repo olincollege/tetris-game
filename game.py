@@ -6,6 +6,7 @@ from view import TetrisView
 
 
 def main():
+    i = 0
     pygame.init()
 
     board = TetrisBoard()
@@ -20,13 +21,16 @@ def main():
             if event.type == QUIT:
                 running = False
 
-        print(board._active_piece)
         if board._active_piece is None:
             board.add_rel_piece()  # Check and add a new piece if none exists
+            i += 1
 
         controller.control_piece()
         board.drop_active_piece()
-        board.move_active_piece_left()
+        if i % 3 == 0:
+            board.move_active_piece_left()
+        if i % 3 == 1:
+            board.move_active_piece_right()
         view.draw_board()
 
         clock.tick(5)

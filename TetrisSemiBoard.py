@@ -63,6 +63,7 @@ class TetrisBoard:
         self._board = board
         self._active_piece = None
         self._unseen_row = 4
+        self._bag = []
 
     def check_all_rows(self):
         """
@@ -102,12 +103,19 @@ class TetrisBoard:
         self._board.insert(0, new_row)
         ###...to each other later on which could cause issues
 
+    def fill_bag(self):
+        for _ in range(2):
+            for i in self.piece_types:
+                self._bag.append(i([2, 3]))
+
     def add_rel_piece(self):
         """
         Adds a randomly-shaped active piece to the game
         """
-        rando_int = random.randint(0, 6)
-        self._active_piece = self.piece_types[rando_int]([2, 3])
+        if self._bag == []:
+            self.fill_bag()
+        rando_int = random.randint(0, len(self._bag) - 1)
+        self._active_piece = self._bag.pop(rando_int)
         for i in self._active_piece.full_piece():
             self._board[i[0]][i[1]] = ["Active", self._active_piece.color()]
 
@@ -193,6 +201,8 @@ class TetrisBoard:
         """
         Moves an active piece to the right unless it cannot move more right
         """
+        if self._active_piece is None:
+            return None
         piece_to_right = False
         try:
             for i in self._active_piece.full_piece():
