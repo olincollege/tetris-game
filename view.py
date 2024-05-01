@@ -17,7 +17,7 @@ class TetrisView:
         # print(rows_to_display, "ROWSROWS")
         # print(self._board._board)
 
-        for i, row in enumerate(self._board._board[4:]):
+        for i, row in enumerate(self._board.board[4:]):
             for j, square in enumerate(row):
                 if square != " ":
                     surf = pygame.Surface((38, 38))

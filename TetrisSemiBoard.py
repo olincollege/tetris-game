@@ -28,6 +28,7 @@ class TetrisBoard:
             # ...only affects one row
         self._board = board
         self._active_piece = None
+        self._unseen_row = 4
 
     def check_all_rows(self):
         """
@@ -170,6 +171,10 @@ class TetrisBoard:
         if can_rotate is False:
             self._active_piece.rotate_cw()
         self.update_piece()
+
+    @property
+    def board(self):
+        return self._board
 
     def __repr__(self):
         repr_str = ""
