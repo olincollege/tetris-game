@@ -10,32 +10,32 @@ pygame.init()
 
 class TetrisController:
 
-    def __init__(self, piece):
+    def __init__(self, board):
 
-        self.piece = piece
+        self.board = board
 
     def control_piece(self):
 
         orientation = 0
+        while True == True:
+            for event in pygame.event.get():
+                if event.type == KEYDOWN:
+                    if event.key == K_LEFT:
+                        return self.board.move_active_piece_left()
 
-        for event in pygame.event.get():
-            if event.type == KEYDOWN:
-                if event.key == K_LEFT:
-                    self.piece.move_left()
+                    elif event.key == K_RIGHT:
+                        return self.board.move_active_piece_right()
 
-                elif event.key == K_RIGHT:
-                    self.piece.move_right()
+                    elif event.key == K_UP:
+                        orientation += 1
+                        return self.board.rotate_active_piece_cw()
 
-                elif event.key == K_UP:
-                    orientation += 1
-                    self.piece.rotate_cw(abs(orientation % 4))
+                    elif event.key == K_DOWN:
+                        orientation -= 1
+                        return self.board.rotate_active_piece_cw()
 
-                elif event.key == K_DOWN:
-                    orientation -= 1
-                    self.piece.rotate_ccw(abs(orientation % 4))
+                    elif event.key == K_SPACE:
+                        return self.board.drop_active_piece()
 
-                elif event.key == K_SPACE:
-                    self.piece.drop()
-
-                elif event.key == K_z:
-                    self.piece.fall_faster()
+            # elif event.key == K_z:
+            #     return self.piece.fall_faster()
