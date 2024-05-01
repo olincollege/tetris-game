@@ -6,7 +6,7 @@ class TetrisView:
         self._board = board  # Store the TetrisBoard object
 
     def draw_board(self):
-        screen = pygame.display.set_mode([400, 800])
+        screen = pygame.display.set_mode([600, 800])
         screen.fill((0, 0, 0))
 
         # Get the screen height

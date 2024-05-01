@@ -2,6 +2,7 @@ import pygame
 from pygame.locals import *
 from TetrisSemiBoard import TetrisBoard
 from TetrisController import TetrisController
+from TetrisPressedController import TetrisPressedController
 from view import TetrisView
 
 
@@ -10,7 +11,7 @@ def main():
     pygame.init()
 
     board = TetrisBoard()
-    controller = TetrisController(board)
+    controller = TetrisPressedController(board)
     view = TetrisView(board)
 
     clock = pygame.time.Clock()
@@ -20,6 +21,7 @@ def main():
         for event in pygame.event.get():
             if event.type == QUIT:
                 running = False
+            if event.type == KEYDOWN:
                 controller.control_piece()
 
         if board._active_piece is None:
@@ -31,9 +33,12 @@ def main():
         #     board.move_active_piece_left()
         # if i % 3 == 1:
         #     board.move_active_piece_right()
-        view.draw_board()
-
-        clock.tick(2)
+        for i in range(10):
+            controller.control_piece()
+            clock.tick(20)
+            if i % 1 == 0:
+                view.draw_board()
+        print(board.points)
 
     pygame.quit()
 
