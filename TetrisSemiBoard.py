@@ -8,6 +8,13 @@ import random
 
 
 class TetrisBoard:
+    """
+    A board for use in the game tetris
+
+    Attributes:
+        piece_types: (list) a list of all 7 Tetris piece types as classes
+    """
+
     piece_types = [
         SemiRelativePiecesForBoard.LPiece([2, 3]),
         SemiRelativePiecesForBoard.IPiece([2, 3]),
@@ -19,6 +26,14 @@ class TetrisBoard:
     ]
 
     def __init__(self):
+        """
+        Constructor for TetrisBoard class
+
+        Attributes:
+            self._board: (list) a list representing every square in the board
+            self._active_piece: (None) if there is an active piece, represents
+            it in this attribute as a piece type
+        """
         rows = []
         for _ in range(10):
             rows.append(" ")
@@ -43,23 +58,35 @@ class TetrisBoard:
     def check_row(self, row_num):
         """
         Checks a specific row to see if it is full, and clears it if it is
+
+        Args:
+            row_num: (int) the row to check
         """
         row_is_full = True
-        for i, pixel in enumerate(self._board[row_num]):
-            if pixel == " " and i != 0 and i != 11:
+        for i in self._board[row_num]:
+            if i[0] != "Inactive":
                 row_is_full = False
-        if row_is_full is True:
+        if row_is_full:
             self.row_clear(row_num)
 
     def row_clear(self, row_num):
         """
         deletes a row from the tetris board then adds another row to the top.
+
+        Args:
+            row_num: (int) the row to clear
         """
         del self._board[row_num]
-        self._board.insert(0, self._board[0])  ###This may make each row equal
+        new_row = []
+        for _ in range(10):
+            new_row.append(" ")
+        self._board.insert(0, new_row)
         ###...to each other later on which could cause issues
 
     def add_rel_piece(self):
+        """
+        Adds a randomly-shaped active piece to the game
+        """
         rando_int = random.randint(0, 6)
         #        self._active_piece = random.choice(TetrisBoard.piece_types)
         self._active_piece = self.piece_types[rando_int]
@@ -68,8 +95,12 @@ class TetrisBoard:
             self._board[i[0]][i[1]] = ["Active", self._active_piece.color()]
 
     def update_piece(self):
+        """
+        Updates the position of an active piece given new coordinates
+        """
         # function uses indices because I had trouble replacing active
         # pieces with spaces only iterating through each value
+        # pylint: disable-next=consider-using-enumerate
         for i in range(len(self._board)):
             for j in range(len(self._board[i])):
                 if self._board[i][j][0] == "Active":
@@ -97,12 +128,18 @@ class TetrisBoard:
             self.add_rel_piece()
 
     def place_piece(self):
+        """
+        Places a piece by making all "Active" squares "Inactive"
+        """
         for i in self._board:
             for j in i:
                 if "Active" in j:
                     j[0] = "Inactive"
 
     def drop_active_piece(self):
+        """
+        Lowers an active piece's vertical position by one square
+        """
         piece_under_active = False
         try:
             for i in self._active_piece.full_piece():
@@ -117,6 +154,9 @@ class TetrisBoard:
             self.place_piece()
 
     def move_active_piece_left(self):
+        """
+        Moves an active piece to the left unless it cannot move more left
+        """
         piece_to_left = False
         try:
             for i in self._active_piece.full_piece():
@@ -131,6 +171,9 @@ class TetrisBoard:
             pass
 
     def move_active_piece_right(self):
+        """
+        Moves an active piece to the right unless it cannot move more right
+        """
         piece_to_right = False
         try:
             for i in self._active_piece.full_piece():
@@ -143,6 +186,9 @@ class TetrisBoard:
             pass
 
     def rotate_active_piece_cw(self):
+        """
+        Rotates the active piece clockwise unless it cannot rotate
+        """
         can_rotate = True
         self._active_piece.rotate_cw()
         for i in self._active_piece.full_piece():
@@ -158,6 +204,9 @@ class TetrisBoard:
         self.update_piece()
 
     def rotate_active_piece_ccw(self):
+        """
+        Rotates the active piece counterclockwise unless it cannot rotate
+        """
         can_rotate = True
         self._active_piece.rotate_ccw()
         for i in self._active_piece.full_piece():
@@ -174,9 +223,21 @@ class TetrisBoard:
 
     @property
     def board(self):
+        """
+        property for self._board
+
+        Returns:
+            self._board: (list) a list representing the board
+        """
         return self._board
 
     def __repr__(self):
+        """
+        Prints the state of the board
+
+        Return:
+            repr_str: (str) a string representation of the board.
+        """
         repr_str = ""
         for i in self._board:
             repr_str = repr_str + str(i) + "\n"
