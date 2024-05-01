@@ -28,6 +28,7 @@ class TetrisPressedController:
         self._down_lock = False
         self._drop_lock = False
 
+    # pylint: disable=too-many-branches
     def control_piece(self):
         """
         A function to control the piece based on buttons pressed
@@ -71,3 +72,19 @@ class TetrisPressedController:
             self._down_lock = False
         if not presses[pygame.K_SPACE]:
             self._drop_lock = False
+
+    @property
+    def thresh_locks(self):
+        """returns all threshes and locks as a list
+
+        returns:
+            (list) all threshold and lock values
+        """
+        return [
+            self._up_lock,
+            self._down_lock,
+            self._drop_lock,
+            self._left_thresh,
+            self._right_thresh,
+            self._z_thresh,
+        ]
